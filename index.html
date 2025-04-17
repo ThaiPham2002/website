@@ -66,12 +66,55 @@
             background-color: #fef0f0;
             border: 1px solid #ff5a5f;
         }
+        /* Ẩn các liên kết menu khi không cần thiết */
+        nav a {
+            display: inline-block;
+            margin: 10px;
+            text-decoration: none;
+            color: #333;
+        }
+        
+        nav .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        nav .menu-toggle span {
+            width: 30px;
+            height: 4px;
+            background-color: #333;
+            margin: 5px 0;
+        }
+        
+        /* Khi màn hình nhỏ hơn 768px, ẩn menu và hiển thị hamburger */
+        @media (max-width: 768px) {
+            nav a {
+                display: none;
+                width: 100%;
+                text-align: center;
+                padding: 10px 0;
+            }
+        
+            nav.active a {
+                display: block;
+            }
+        
+            nav .menu-toggle {
+                display: flex;
+            }
+        }
 
     </style>
 </head>
 <body>
     <header>Theo chân thổ địa Đà Nẵng</header>
     <nav>
+        <div class="menu-toggle" id="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <a href="#an-uong">Ăn uống</a>
         <a href="#diem-den">Điểm đến & Trải nghiệm</a>
         <a href="#cho-o">Chỗ ở</a>
@@ -120,5 +163,11 @@
         </div>
     </section>
 </div>
+    <script>
+        document.getElementById("menu-toggle").addEventListener("click", function() {
+            var nav = document.querySelector("nav");
+            nav.classList.toggle("active");
+        });
+    </script>
 </body>
 </html>
