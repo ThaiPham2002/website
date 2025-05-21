@@ -66,6 +66,16 @@
             background-color: #fef0f0;
             border: 1px solid #ff5a5f;
         }
+        .tab-section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .tab-section.active {
+            display: block;
+            opacity: 1;
+        }
              
     </style>
 </head>
@@ -84,7 +94,7 @@
         <a href="#an-toan">An toàn & Tiện ích</a>
     </nav>
     <div class="content">
-    <section id="an-uong">
+    <section id="an-uong" class="tab-section active">
         <h2>Ăn uống</h2>
         <div class="food-container">
             <a href="goi-ca-trich.html" style="text-decoration: none; color: inherit;">
@@ -124,6 +134,71 @@
             </a>
         </div>
     </section>
+
+    <section id="diem-den" class="tab-section">
+    <h2>Điểm đến & Trải nghiệm</h2>
+    <div class="food-container">
+        <a href="ban-dao-son-tra.html" style="text-decoration: none; color: inherit;">
+            <div class="food-card">
+                <img src="images/sontra.jpg" alt="Bán đảo Sơn Trà">
+                <h3>Bán đảo Sơn Trà</h3>
+                <p>Thiên nhiên hoang sơ, trong lành</p>
+            </div>
+        </a>
+
+        <a href="ba-na-hills.html" style="text-decoration: none; color: inherit;">
+            <div class="food-card">
+                <img src="images/banahills.jpg" alt="Bà Nà Hills">
+                <h3>Bà Nà Hills</h3>
+                <p>Cầu Vàng nổi tiếng</p>
+            </div>
+        </a>
+
+        <a href="nui-than-tai.html" style="text-decoration: none; color: inherit;">
+            <div class="food-card">
+                <img src="images/deohaivan.jpg" alt="Đèo Hải Vân">
+                <h3>Đèo Hải Vân</h3>
+                <p>Thiên nhiên hùng vĩ</p>
+            </div>
+        </a>
+
+        <a href="bien-my-khe.html" style="text-decoration: none; color: inherit;">
+            <div class="food-card">
+                <img src="images/mykhe.jpg" alt="Biển Mỹ Khê">
+                <h3>Biển Mỹ Khê</h3>
+                <p>Bãi biển đẹp nhất hành tinh</p>
+            </div>
+        </a>
+    </div>
+</section>
 </div>
+<script>
+    const navLinks = document.querySelectorAll('nav a');
+    const sections = document.querySelectorAll('.tab-section');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+
+            // Ẩn tất cả section
+            sections.forEach(section => {
+                section.classList.remove('active');
+                setTimeout(() => section.style.display = 'none', 300); // delay để hiệu ứng fade out
+            });
+
+            // Hiện section mục tiêu
+            setTimeout(() => {
+                targetSection.style.display = 'block';
+                setTimeout(() => {
+                    targetSection.classList.add('active');
+                }, 10); // delay nhỏ để trigger CSS transition
+            }, 300); // chờ fade out hoàn tất
+        });
+    });
+</script>
+
 </body>
 </html>
